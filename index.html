@@ -1,0 +1,47 @@
+
+
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Regalo especial</title>
+  <style>
+    :root{ --bg:#fefbff; --card:#ffeaf5; --accent:#733e8b; --text:#3a2f47; }
+    body{margin:0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, 'Noto Sans', sans-serif; background: var(--bg); color: var(--text);} 
+    .wrap{min-height:100dvh; display:flex; align-items:center; justify-content:center; padding:24px;}
+    .card{background:var(--card); box-shadow:0 10px 30px rgba(115,62,139,0.15); border-radius:18px; padding:28px; max-width:560px; text-align:center;}
+    h1{margin:0 0 8px; font-size:28px; color:var(--accent)}
+    p{margin:0 0 14px}
+    button{background: var(--accent); color:#fff; border:0; padding:12px 18px; border-radius:999px; font-weight:600; cursor:pointer}
+    button:hover{background:#5e2f77}
+    .hint{font-size:12px; opacity:.8; margin-top:10px}
+  </style>
+  <script>
+    const PDF_NAME = 'vas_a_ser_tia_sin_footer.pdf';
+    function buildPdfPath(){
+      const p = window.location.pathname; // ej.: /NOMBRE-DEL-REPO/ o /
+      const base = p.endsWith('/') ? p : (p + '/');
+      return base + PDF_NAME;
+    }
+    function abrirRegalo(){
+      const ok = confirm('¿Deseas abrir el regalo?');
+      const PDF_PATH = buildPdfPath();
+      if(ok){ window.location.href = PDF_PATH; }
+      else { const msg = document.getElementById('msg'); if (msg) msg.textContent = '¡Cuando estés lista, vuelve a intentarlo!'; }
+    }
+    window.addEventListener('load', ()=>{ setTimeout(abrirRegalo, 500); });
+  </script>
+</head>
+<body>
+  <div class="wrap"> 
+    <div class="card"> 
+      <h1>Hay un regalo esperándote 🎁</h1>
+      <p>Haz clic abajo para abrirlo.</p>
+      <button onclick="abrirRegalo()">Abrir regalo</button>
+      <div id="msg" class="hint"></div>
+    </div>
+  </div>
+</body>
+</html>
+
